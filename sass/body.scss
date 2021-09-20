@@ -1,0 +1,161 @@
+.body {
+  height: calc(100vh - 60px);
+  padding-top: 0px;
+  overflow: auto;
+  
+  .nav-container {
+    position: sticky;
+    top: 0px; // 60px w/o overflow: auto on body above
+    padding: 20px 0;
+    background-color: $page-background;
+
+    a {
+      display: block;
+      text-transform: capitalize;
+      text-decoration: none;
+      color: $black;
+      font-size: 14px;
+      cursor: pointer;
+      width: fit-content;
+
+      &.active {
+        border-bottom: 1px solid $black;
+      }
+    }
+
+    .internal-nav {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .external-nav {
+      display: none;
+    }
+  }
+
+  .post-preview, .post-detail  {
+    line-height: 1.5rem;
+    border: 1px solid $border-gray;
+    border-radius: 4px;
+    margin: 15px 0;
+    background-color: $white;
+
+    .title {
+      h3, p {
+        margin: 0px;
+        font-family: 'Roboto Mono', monospace;
+      }
+
+      h3 {
+        text-transform: capitalize;
+      }
+
+      p {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .post-preview {
+    padding: 15px;
+    cursor: pointer;
+
+    .preview-body {
+      margin: 0px;
+      padding-top: 10px;
+    }
+
+    &:first-child {
+      margin-top: 0px;
+    }
+  }
+
+  .post-detail {
+    margin-top: 0px;
+    padding: 25px;
+    height: fit-content;
+
+    .detail-body {
+      margin-top: 10px;
+      margin-bottom: 0px;
+    }
+  }
+
+  #post-list-get-more {
+    height: 10px;
+  }
+
+  #post-list-end {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    
+    svg {
+      font-size: 28px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .body {
+    height: calc(100vh - 165px); // 140px? 
+    padding-top: 20px;
+    display: flex;
+    
+    .nav-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 20%; 
+      padding: 0;
+
+      a {
+        margin: 10px 0;
+        padding: 3px 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      .internal-nav, .external-nav {
+        display: block;
+      }
+
+      .internal-nav a {
+        font-size: 16px;
+      }
+
+      .external-nav {
+        position: relative;
+        font-size: 14px;
+        margin: 0;
+
+        svg {
+          position: absolute;
+          top: 6px;
+          padding-left: 6px;
+          font-size: 10px;
+        }
+      }
+    }
+
+    .post-list {
+      width: 80%;
+      overflow-y: auto;
+    }
+
+    .post-preview, .post-detail {
+      .title {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    
+    .post-detail {
+      width: 80%;
+      overflow-y: auto;
+      max-height: calc(100vh - 215px);
+    }
+  }
+}

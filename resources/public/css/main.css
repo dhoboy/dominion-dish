@@ -1,0 +1,257 @@
+body {
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: #f9f9f9;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+#app .header-wrapper .header, #app .body {
+  max-width: 1200px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#app .error {
+  text-align: center;
+}
+#app .loader {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  margin: 40px auto 30px;
+  color: #333;
+  animation: pulse 4s linear 0s infinite;
+}
+#app .loader p {
+  font-size: 20px;
+}
+#app .loader svg {
+  padding: 0 15px;
+  font-size: 28px;
+}
+#app .loader.small p {
+  font-size: 16px;
+}
+#app .loader.small svg {
+  font-size: 35px;
+}
+@keyframes pulse {
+  0% {
+    opacity: 25%;
+  }
+  25% {
+    opacity: 50%;
+  }
+  50% {
+    opacity: 100%;
+  }
+  75% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 25%;
+  }
+}
+@media (min-width: 768px) {
+  #app .header-wrapper .header, #app .body {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+  #app .loader svg {
+    font-size: 55px;
+  }
+}
+#app .header-wrapper {
+  background-color: #cad5ff;
+  position: sticky;
+  top: 0;
+}
+#app .header-wrapper .header {
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+}
+#app .header-wrapper .header h1, #app .header-wrapper .header h3 {
+  text-transform: uppercase;
+  text-align: left;
+}
+#app .header-wrapper .header h1 {
+  font-size: 30px;
+  margin: 0;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+#app .header-wrapper .header h3 {
+  font-family: "Roboto Mono", monospace;
+  font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  padding-bottom: 20px;
+  display: none;
+}
+#app .header-wrapper .header .icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#app .header-wrapper .header .icon svg {
+  align-self: center;
+  font-size: 34px;
+}
+@media (min-width: 768px) {
+  #app .header-wrapper .header h1 {
+    font-size: 42px;
+    padding-top: 20px;
+    padding-bottom: 0;
+  }
+  #app .header-wrapper .header h3 {
+    display: block;
+  }
+  #app .header-wrapper .header .icon svg {
+    font-size: 48px;
+  }
+}
+@media (min-width: 825px) {
+  #app .header-wrapper .header svg {
+    font-size: 64px;
+  }
+}
+#app .body {
+  height: calc(100vh - 60px);
+  padding-top: 0px;
+  overflow: auto;
+}
+#app .body .nav-container {
+  position: sticky;
+  top: 0px;
+  padding: 20px 0;
+  background-color: #f9f9f9;
+}
+#app .body .nav-container a {
+  display: block;
+  text-transform: capitalize;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  width: fit-content;
+}
+#app .body .nav-container a.active {
+  border-bottom: 1px solid #333;
+}
+#app .body .nav-container .internal-nav {
+  display: flex;
+  justify-content: space-between;
+}
+#app .body .nav-container .external-nav {
+  display: none;
+}
+#app .body .post-preview, #app .body .post-detail {
+  line-height: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin: 15px 0;
+  background-color: #fff;
+}
+#app .body .post-preview .title h3, #app .body .post-preview .title p, #app .body .post-detail .title h3, #app .body .post-detail .title p {
+  margin: 0px;
+  font-family: "Roboto Mono", monospace;
+}
+#app .body .post-preview .title h3, #app .body .post-detail .title h3 {
+  text-transform: capitalize;
+}
+#app .body .post-preview .title p, #app .body .post-detail .title p {
+  white-space: nowrap;
+}
+#app .body .post-preview {
+  padding: 15px;
+  cursor: pointer;
+}
+#app .body .post-preview .preview-body {
+  margin: 0px;
+  padding-top: 10px;
+}
+#app .body .post-preview:first-child {
+  margin-top: 0px;
+}
+#app .body .post-detail {
+  margin-top: 0px;
+  padding: 25px;
+  height: fit-content;
+}
+#app .body .post-detail .detail-body {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+#app .body #post-list-get-more {
+  height: 10px;
+}
+#app .body #post-list-end {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+#app .body #post-list-end svg {
+  font-size: 28px;
+}
+@media (min-width: 768px) {
+  #app .body {
+    height: calc(100vh - 165px);
+    padding-top: 20px;
+    display: flex;
+  }
+  #app .body .nav-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20%;
+    padding: 0;
+  }
+  #app .body .nav-container a {
+    margin: 10px 0;
+    padding: 3px 0;
+  }
+  #app .body .nav-container a:first-child {
+    margin-top: 0;
+  }
+  #app .body .nav-container .internal-nav, #app .body .nav-container .external-nav {
+    display: block;
+  }
+  #app .body .nav-container .internal-nav a {
+    font-size: 16px;
+  }
+  #app .body .nav-container .external-nav {
+    position: relative;
+    font-size: 14px;
+    margin: 0;
+  }
+  #app .body .nav-container .external-nav svg {
+    position: absolute;
+    top: 6px;
+    padding-left: 6px;
+    font-size: 10px;
+  }
+  #app .body .post-list {
+    width: 80%;
+    overflow-y: auto;
+  }
+  #app .body .post-preview .title, #app .body .post-detail .title {
+    display: flex;
+    justify-content: space-between;
+  }
+  #app .body .post-detail {
+    width: 80%;
+    overflow-y: auto;
+    max-height: calc(100vh - 215px);
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,83 @@
+// have to run:
+// npx sass --watch sass/main.scss:resources/public/css/main.css
+// when developing. 
+// shadow-cljs only compiles cljs -> js
+body {
+  margin: 0
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  @import './colors';
+
+  background-color: $page-background;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: $black;
+
+  // page gutters
+  .header-wrapper .header, .body {
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .error {
+    text-align: center;
+  }
+
+  .loader {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    margin: 40px auto 30px;
+    color: $black;
+    animation: pulse 4s linear 0s infinite; // direction fill-mode;
+
+    p {
+      font-size: 20px;
+    }
+
+    svg {
+      padding: 0 15px;
+      font-size: 28px;
+    }
+
+    &.small {
+      p {
+        font-size: 16px;
+      }
+      svg {
+        font-size: 35px;
+      }
+    }
+  }
+
+  @keyframes pulse {
+    0%   { opacity: 25%;  }
+    25%  { opacity: 50%;  }
+    50%  { opacity: 100%; }
+    75%  { opacity: 50%;  }
+    100% { opacity: 25%;  }
+  }
+
+  @media (min-width: 768px) {
+    .header-wrapper .header, .body {
+      padding-left: 35px;
+      padding-right: 35px;
+    }
+
+    .loader svg {
+      font-size: 55px;
+    }
+  }  
+
+  @import './header';
+  @import './body';
+}

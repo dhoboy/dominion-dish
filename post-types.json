@@ -1,0 +1,8 @@
+{ 
+  "post-types": [
+    "latest",
+    "football",
+    "boys-basketball" ,
+    "girls-basketball"
+  ]
+}
