@@ -15,23 +15,24 @@
   (file-response "index.html" {:root "resources/public"}))
 
 (defn post-list-handler [post-type page per]
-  (response
-    (api/get-posts
-      (merge
-        {:post-type post-type}
-        (when page
-          {:page (if (string? page)
-                   (Integer/parseInt page)
-                   page)})
-        (when per
-          {:per (if (string? per)
-                  (Integer/parseInt per)
-                  per)})))))
+  (let [resp (api/get-posts
+              (merge
+               {:post-type post-type}
+               (when page
+                 {:page (if (string? page)
+                          (Integer/parseInt page)
+                          page)})
+               (when per
+                 {:per (if (string? per)
+                         (Integer/parseInt per)
+                         per)})))]
+    {:status (if (:error resp) 500 200)
+     :body resp}))
 
 (defn post-get-handler [post-id]
-  (response
-    (api/get-post
-      {:post-id post-id})))
+  (let [resp (api/get-post {:post-id post-id})]
+    {:status (if (:error resp) 500 200)
+     :body resp}))
 
 ;; routes
 (defroutes app-routes

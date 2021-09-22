@@ -96,6 +96,7 @@ body {
   margin-bottom: 0px;
   padding-bottom: 20px;
   display: none;
+  font-weight: 400;
 }
 #app .header-wrapper .header .icon {
   display: flex;
@@ -128,6 +129,9 @@ body {
   height: calc(100vh - 60px);
   padding-top: 0px;
   overflow: auto;
+}
+#app .body .error {
+  font-weight: 400;
 }
 #app .body .nav-container {
   position: sticky;

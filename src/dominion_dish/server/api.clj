@@ -93,9 +93,6 @@
            (some? ((keyword post-type) @next-page-token)))
       (str "&pageToken=" ((keyword post-type) @next-page-token)))))
 
-;; TODO: these might still be returning status 200...
-;; we dont want status 200 responses with error keys
-;; may need to re-visit and put the appropriate error code on this 
 (defn- handle-timeout
   "Handles timeouts for calls by putting an error message on the passed in channel"
   [{:keys [channel ms url]}]
@@ -142,7 +139,6 @@
       (alt!
         (timeout 5000) (handle-timeout {:channel post-by-id-chan :ms 5000 :url url})
         call ([{:keys [status body] :as resp}]
-              ;; (println "status: " status)
               (if (= status 200)
                 (let [parsed-body (parse-string body true)
                       post-type-key (or
@@ -253,10 +249,10 @@
       (do 
         ;; (println "Getting more, will get what you need from the channel")
         (get-post-list
-          {:post-type post-type
-           :num requested-posts
-           :page page
-           :per per})
+         {:post-type post-type
+          :num requested-posts
+          :page page
+          :per per})
         (<!! post-list-chan)) ; block for paginated response from this channel
       (do
         ;; (println "already got it covered, getting it from the atom")

@@ -58,11 +58,15 @@
 (re-frame/reg-event-fx
  ::check-post-list
  (fn [{:keys [db]}]
-   (let [post-type (:post-type db)
+   (let [loading (:loading db)
+         post-type (:post-type db)
          post-type-key (keyword post-type)
          {:keys [last-loaded-page per items]} (post-type-key db)]
-     (when (= (* last-loaded-page per) (count items))
+     (when (and (= (* last-loaded-page per) (count items)) (not loading))
        (re-frame/dispatch [::get-posts {:post-type post-type :page (+ last-loaded-page 1) :per per}])))))
+
+;; TODO: look into cancel tokens in the case where you get
+;; a request while another one is underway
 
 ;; get-posts
 ;; usage: (dispatch [::get-posts {:post-type "boys-basketball" :page 1 :per 10}])
@@ -85,19 +89,21 @@
  (fn [db [_ {:keys [post-type]} {:keys [pagination items]}]]
    (let [post-type-key (keyword post-type)]
      (assoc
-       db
-       :loading false
-       post-type-key {:last-loaded-page (:page pagination)
-                      :per (:per pagination)
-                      :items (utils/add-items-to-list
-                              {:current-items (:items (post-type-key db))
-                               :new-items items})}))))
+      db
+      :loading false
+      :error false
+      post-type-key {:last-loaded-page (:page pagination)
+                     :per (:per pagination)
+                     :items (utils/add-items-to-list
+                             {:current-items (:items (post-type-key db))
+                              :new-items items})}))))
 
 (re-frame/reg-event-db
  ::get-posts-failure
  (fn [db [_ _resp]]
    (assoc 
     db
+    :loading false
     :error true)))
   
 ;; get-post
@@ -120,6 +126,7 @@
      (assoc
       db
       :loading false
+      :error false
       post-type-key {:items (utils/add-items-to-list
                              {:current-items (:items (post-type-key db))
                               :new-items items})}))))
@@ -129,4 +136,5 @@
  (fn [db [_ _resp]]
    (assoc 
     db
+    :loading false
     :error true)))

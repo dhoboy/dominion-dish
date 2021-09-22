@@ -2,6 +2,10 @@
   height: calc(100vh - 60px);
   padding-top: 0px;
   overflow: auto;
+
+  .error {
+    font-weight: 400;
+  }
   
   .nav-container {
     position: sticky;

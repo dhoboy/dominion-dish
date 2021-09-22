@@ -32,8 +32,8 @@
   (let [loading @(subscribe [::subs/loading])
         error @(subscribe [::subs/error])]
     [:div.post-detail {:ref (fn [el] (reset! post-detail-el el))}
-     (when loading (generic/loader {:size "large"}))
-     (when error (generic/error))
+     (when (and loading (not error)) (generic/loader {:size "large"}))
+     (when (and (not loading) error) (generic/error))
      (when (and (not loading) (not error))
        [:<>
          [:div.title
@@ -55,9 +55,9 @@
      (map
       #(post-preview (assoc % :post-type post-type))
       (:items posts))
-     (when loading
+     (when (and loading (not error))
        (generic/loader {:size (if (= (count (:items posts)) 0) "large" "small")}))
-     (when error
+     (when (and (not loading) error)
        (generic/error "The Dish can't get more posts right now. Give us a moment and try again."))
      (when (= (* last-loaded-page per) (count (:items posts)))
        [:div {:id "post-list-get-more"
