@@ -76,7 +76,7 @@
    {:db (assoc db :loading true)
     :http-xhrio {:method          :get
                  :uri             (str 
-                                   "http://localhost:3000/posts/" 
+                                  "/posts"
                                    post-type 
                                    "?page=" page "&per=" per)
                  :timeout         8000
@@ -113,7 +113,7 @@
  (fn [{:keys [db]} [_ {:keys [post-type post-id]}]]
    {:db (assoc db :loading true)
     :http-xhrio {:method          :get
-                 :uri             (str "http://localhost:3000/post/" post-id)
+                 :uri             (str "/post/" post-id)
                  :timeout         8000
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success      [::get-post-success {:post-type post-type}]

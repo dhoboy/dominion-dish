@@ -1,11 +1,20 @@
 (ns dominion-dish.server.api
 (:require [cheshire.core :refer :all] ; parses json
+          [environ.core :refer [env]]
           [clojure.string :as str]
           [clj-http.client :as http-client]
           [simple-time.core :as stime]
           [clojure.core.async :as async :refer [>! >!! <! <!! go go-loop chan sliding-buffer alt! timeout]]))
 
-(def api-keys (parse-string (slurp "./keys.json") true))
+(def ENV (env :ENV "local")) ; local or prod
+
+(def app-keys 
+  (if (= ENV "local")
+    (parse-string (slurp "./keys.json") true)
+    nil))
+
+(def blog-id (env :blog-id (:blog-id app-keys)))
+(def api-key (env :api-key (:api-key app-keys)))
 
 ;; add any new post-types to this json file and re-load this api and its ready to go
 (def post-types
@@ -80,11 +89,11 @@
   [{:keys [post-id post-type] :or {post-type "latest"}}] ; "latest" post-type gets all posts
    (str
     "https://www.googleapis.com/blogger/v3/blogs/" 
-    (:blog-id api-keys)
+    blog-id
     "/posts" 
     (when post-id (str "/" post-id))
     "?key=" 
-    (:api-key api-keys)
+    api-key
     "&orderBy=published"
     "&status=live"
     (when (not= post-type "latest") (str "&labels=" post-type)) ; filter on post-type

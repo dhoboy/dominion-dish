@@ -7,7 +7,7 @@
                  [org.clojure/core.async "1.3.618"]
                  [simple-time "0.2.0"]
                  [compojure "1.6.1"]
-                 [aleph "0.4.6"]
+                 [environ "1.2.0"]
                  [mount "0.1.16"]
                  [cheshire "5.10.0"]
                  [clj-http "3.12.3"]
