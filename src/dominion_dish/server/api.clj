@@ -6,15 +6,20 @@
           [simple-time.core :as stime]
           [clojure.core.async :as async :refer [>! >!! <! <!! go go-loop chan sliding-buffer alt! timeout]]))
 
-(def ENV (env :ENV "local")) ; local or prod
+;; this parse-string attempt is erroring out heroku
+;; TODO: look more into this env variable stuff
+;; (def ENV (env :ENV "local")) ; local or prod
 
-(def app-keys 
-  (if (= ENV "local")
-    (parse-string (slurp "./keys.json") true)
-    nil))
+;; (def app-keys
+;;   (if (= ENV "local")
+;;     (parse-string (slurp "./keys.json") true)
+;;     nil))
 
-(def blog-id (env :blog-id (:blog-id app-keys)))
-(def api-key (env :api-key (:api-key app-keys)))
+;; (def blog-id (env :blog-id (:blog-id app-keys)))
+;; (def api-key (env :api-key (:api-key app-keys)))
+
+(def blog-id (env :blog-id))
+(def api-key (env :api-key))
 
 ;; add any new post-types to this json file and re-load this api and its ready to go
 (def post-types
