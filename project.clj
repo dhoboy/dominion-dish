@@ -1,8 +1,11 @@
 (defproject dominion-dish-backend "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Sports Blog for the VHSL Dominion District"
+  :url "http://dominion-dish.herokuapp.com/"
+  :license {:name "Eclipse Public License"
+            :url "https://www.eclipse.org/legal/epl-v10.html"}
   :min-lein-version "2.0.0"
   :main dominion-dish.server.core
+  :aot [dominion-dish.server.core]
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/core.async "1.3.618"]
                  [simple-time "0.2.0"]
@@ -18,6 +21,7 @@
                  [jumblerg/ring-cors "2.0.0"]]
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler dominion-dish.server.core/app}
-  :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.2"]]}})
+  :profiles {:dev {:dependencies 
+                   [[javax.servlet/servlet-api "2.5"]
+                    [ring/ring-mock "0.3.2"]]}
+             :production {:env {:production true}}})

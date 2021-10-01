@@ -6,6 +6,8 @@
           [simple-time.core :as stime]
           [clojure.core.async :as async :refer [>! >!! <! <!! go go-loop chan sliding-buffer alt! timeout]]))
 
+;; None of this slurping files stuff is working in uberjars
+
 ;; this parse-string attempt is erroring out heroku
 ;; TODO: look more into this env variable stuff
 ;; (def ENV (env :ENV "local")) ; local or prod
@@ -22,12 +24,18 @@
 (def api-key (env :api-key))
 
 ;; add any new post-types to this json file and re-load this api and its ready to go
-(def post-types
-  (into #{}
-    (:post-types
-      (parse-string
-        (slurp "./post-types.json")
-        true))))
+;; (def post-types
+;;   (into #{}
+;;     (:post-types
+;;       (parse-string
+;;         (slurp (io/resource "../../../post-types.json"))
+;;         true))))
+
+(def post-types 
+  #{"latest"
+    "football"
+    "boys-basketball"
+    "girls-basketball"})
 
 ;; caching posts here to save on google api calls and for speed
 ;; e.g. { :latest [] :football [] :boys-basketball [] :girls-basketball [] }

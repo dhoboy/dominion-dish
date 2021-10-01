@@ -1,4 +1,5 @@
 (ns dominion-dish.server.core
+  (:gen-class)
   (:require [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
             [ring.adapter.jetty :as jetty]
