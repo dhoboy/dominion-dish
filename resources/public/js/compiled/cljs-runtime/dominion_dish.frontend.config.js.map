@@ -1,0 +1,1 @@
+{"version":3,"sources":["dominion_dish/frontend/config.cljs"],"mappings":";AAEA,AAAKA,6CACMC","names":["dominion-dish.frontend.config/debug?","js/goog.DEBUG"],"sourcesContent":["(ns dominion-dish.frontend.config)\n\n(def debug?\n  ^boolean goog.DEBUG)\n"]}
