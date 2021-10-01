@@ -2,6 +2,7 @@
   (:gen-class)
   (:require [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
+            [environ.core :refer [env]]
             [ring.adapter.jetty :as jetty]
             [ring.middleware.json :refer [wrap-json-response]]
             [ring.middleware.params :refer [wrap-params]]
@@ -58,7 +59,7 @@
 
 ;; start server
 (mount/defstate server
-  :start (jetty/run-jetty #'app {:port 3000 :join? false})
+  :start (jetty/run-jetty #'app {:port (Integer. (or (env :port) 3000)) :join? false})
   :stop (.stop server))
 
 (defn -main [& args]
