@@ -20,6 +20,7 @@
                  [ring/ring-json "0.5.0"]
                  [jumblerg/ring-cors "2.0.0"]]
   :plugins [[lein-ring "0.12.5"]]
+  :uberjar-name "dominion-dish-backend-0.1.0-SNAPSHOT-standalone.jar"
   :ring {:handler dominion-dish.server.core/app}
   :profiles {:dev {:dependencies 
                    [[javax.servlet/servlet-api "2.5"]
