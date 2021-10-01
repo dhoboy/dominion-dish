@@ -76,7 +76,7 @@
    {:db (assoc db :loading true)
     :http-xhrio {:method          :get
                  :uri             (str 
-                                  "/posts"
+                                  "/posts/"
                                    post-type 
                                    "?page=" page "&per=" per)
                  :timeout         8000
